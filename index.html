@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BABU - Be A Better yoU!</title>
+<script>
+  (() => {
+    const param = new URLSearchParams(window.location.search).get("scoutTheme");
+    const theme =
+      param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", theme);
+  })();
+</script>
+<style>
+:root {
+  color-scheme: light;
+  --cp-bg: #f7f4ef;
+  --cp-bg-elevated: #fcfbf8;
+  --cp-surface: #ffffff;
+  --cp-surface-soft: #f5f5f5;
+  --cp-border: #dedede;
+  --cp-border-strong: #919191;
+  --cp-text: #242424;
+  --cp-text-muted: #5c5c5c;
+  --cp-text-soft: #6f6f6f;
+  --cp-accent: #5B9BD5;
+  --cp-accent-hover: #4A8BC2;
+  --cp-accent-soft: rgba(91, 155, 213, 0.08);
+  --cp-accent-fg: #ffffff;
+  --cp-success: #16a34a;
+  --cp-danger: #dc2626;
+  --cp-warning: #f59e0b;
+  --cp-link: #0078d4;
+  --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+  --cp-gold: #F0C75E;
+  --cp-blue-dark: #4A8BC2;
+  --cp-blue-light: #7AB3E0;
+}
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --cp-bg: #3d3b3a;
+  --cp-bg-elevated: #343231;
+  --cp-surface: #292929;
+  --cp-surface-soft: #2e2e2e;
+  --cp-border: #474747;
+  --cp-border-strong: #5f5f5f;
+  --cp-text: #dedede;
+  --cp-text-muted: #919191;
+  --cp-text-soft: #b0b0b0;
+  --cp-accent: #7AB3E0;
+  --cp-accent-hover: #5B9BD5;
+  --cp-accent-soft: rgba(122, 179, 224, 0.14);
+  --cp-accent-fg: #1a1a1a;
+  --cp-success: #4ade80;
+  --cp-danger: #f87171;
+  --cp-warning: #fbbf24;
+  --cp-link: #4da6ff;
+  --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+  --cp-gold: #F0C75E;
+  --cp-blue-dark: #4A8BC2;
+  --cp-blue-light: #7AB3E0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--cp-bg);
+  color: var(--cp-text);
+  font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px 32px;
+  background: linear-gradient(180deg, var(--cp-bg-elevated) 0%, var(--cp-bg) 100%);
+  border-bottom: 1px solid var(--cp-border);
+}
+
+.hero h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 12px;
+  letter-spacing: 0.04em;
+  color: var(--cp-accent);
+}
+
+.hero .tagline {
+  font-size: 1rem;
+  color: var(--cp-text-muted);
+  margin-top: 4px;
+}
+
+.content {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 40px 32px 60px;
+}
+
+.disclaimer {
+  background: var(--cp-surface-soft);
+  border-left: 4px solid var(--cp-accent);
+  padding: 16px 20px;
+  border-radius: 0 0.625rem 0.625rem 0;
+  margin-bottom: 32px;
+  font-size: 0.9rem;
+  color: var(--cp-text-soft);
+}
+
+.disclaimer strong { color: var(--cp-text); }
+
+h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-top: 36px;
+  margin-bottom: 12px;
+  color: var(--cp-text);
+  border-bottom: 2px solid var(--cp-border);
+  padding-bottom: 6px;
+}
+
+p { margin-bottom: 12px; }
+
+ul, ol {
+  margin-bottom: 12px;
+  padding-left: 24px;
+}
+
+li { margin-bottom: 6px; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 0.9rem;
+}
+
+th {
+  background: var(--cp-accent);
+  color: var(--cp-accent-fg);
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+}
+
+td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--cp-border);
+}
+
+tr:nth-child(even) td { background: var(--cp-surface-soft); }
+
+code {
+  background: var(--cp-surface-soft);
+  border: 1px solid var(--cp-border);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: Consolas, "Courier New", Courier, monospace;
+  font-size: 0.88em;
+}
+
+pre {
+  background: var(--cp-surface);
+  border: 1px solid var(--cp-border);
+  border-radius: 0.625rem;
+  padding: 16px;
+  overflow-x: auto;
+  margin: 12px 0 20px;
+  font-family: Consolas, "Courier New", Courier, monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.footer {
+  text-align: center;
+  padding: 24px;
+  color: var(--cp-text-muted);
+  font-size: 0.82rem;
+  border-top: 1px solid var(--cp-border);
+}
+
+/* ---- Mascot Animations ---- */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.float { animation: float 3s ease-in-out infinite; }
+
+@keyframes blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  96% { transform: scaleY(0.05); }
+}
+.eyes { transform-origin: center; animation: blink 4s ease-in-out infinite; }
+
+@keyframes bubble-bounce {
+  0%, 100% { transform: translate(0, 0) rotate(3deg); }
+  50% { transform: translate(2px, -3px) rotate(5deg); }
+}
+.speech-bubble { animation: bubble-bounce 2.5s ease-in-out infinite; transform-origin: bottom left; }
+
+@keyframes cheek-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.65; }
+}
+.cheek { animation: cheek-glow 3s ease-in-out infinite; }
+
+svg { filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1)); }
+</style>
+</head>
+<body>
+
+<!-- ==================== HERO with ANIMATED MASCOT ==================== -->
+<div class="hero">
+  <svg class="float" width="240" height="280" viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="140" cy="195" rx="85" ry="90" fill="#5B9BD5" />
+    <ellipse cx="120" cy="165" rx="45" ry="35" fill="#7AB3E0" opacity="0.5" />
+    <ellipse cx="105" cy="278" rx="28" ry="14" fill="#4A8BC2" />
+    <ellipse cx="175" cy="278" rx="28" ry="14" fill="#4A8BC2" />
+    <g transform="translate(55, 185) rotate(-15)">
+      <ellipse cx="0" cy="20" rx="18" ry="28" fill="#4A8BC2" />
+      <circle cx="-4" cy="-5" r="10" fill="#5B9BD5" />
+    </g>
+    <g transform="translate(225, 190) rotate(10)">
+      <ellipse cx="0" cy="20" rx="18" ry="28" fill="#4A8BC2" />
+      <circle cx="4" cy="-5" r="10" fill="#5B9BD5" />
+    </g>
+    <g transform="translate(218, 170) rotate(12)">
+      <rect x="-14" y="-20" width="28" height="38" rx="3" fill="#F0C75E" stroke="#D4A843" stroke-width="1.5" />
+      <rect x="-8" y="-24" width="16" height="8" rx="2" fill="#D4A843" />
+      <line x1="-8" y1="-8" x2="8" y2="-8" stroke="#D4A843" stroke-width="1.5" />
+      <line x1="-8" y1="-2" x2="8" y2="-2" stroke="#D4A843" stroke-width="1.5" />
+      <line x1="-8" y1="4" x2="5" y2="4" stroke="#D4A843" stroke-width="1.5" />
+      <polyline points="-8,10 -5,13 0,7" fill="none" stroke="#27AE60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+    <ellipse cx="140" cy="185" rx="55" ry="50" fill="#EAF2FA" />
+    <g class="eyes">
+      <circle cx="120" cy="175" r="10" fill="#2E4057" />
+      <circle cx="160" cy="175" r="10" fill="#2E4057" />
+      <circle cx="123" cy="172" r="3.5" fill="#FFFFFF" />
+      <circle cx="163" cy="172" r="3.5" fill="#FFFFFF" />
+      <circle cx="117" cy="177" r="1.5" fill="#FFFFFF" />
+      <circle cx="157" cy="177" r="1.5" fill="#FFFFFF" />
+    </g>
+    <ellipse class="cheek" cx="100" cy="192" rx="12" ry="8" fill="#F4A460" opacity="0.45" />
+    <ellipse class="cheek" cx="180" cy="192" rx="12" ry="8" fill="#F4A460" opacity="0.45" style="animation-delay: 0.5s;" />
+    <path d="M130 198 Q140 210 150 198" fill="none" stroke="#2E4057" stroke-width="2.5" stroke-linecap="round" />
+    <circle cx="70" cy="140" r="18" fill="#4A8BC2" />
+    <circle cx="70" cy="140" r="10" fill="#7AB3E0" />
+    <circle cx="210" cy="140" r="18" fill="#4A8BC2" />
+    <circle cx="210" cy="140" r="10" fill="#7AB3E0" />
+    <g class="speech-bubble">
+      <g transform="translate(175, 70)">
+        <rect x="-40" y="-30" width="95" height="42" rx="12" fill="var(--cp-surface)" stroke="var(--cp-border)" stroke-width="1.5" />
+        <polygon points="-15,12 -25,25 -5,12" fill="var(--cp-surface)" stroke="var(--cp-border)" stroke-width="1.5" />
+        <polygon points="-14,11 -22,22 -6,11" fill="var(--cp-surface)" />
+        <text x="7" y="-10" text-anchor="middle" font-size="11" font-weight="700" fill="#5B9BD5" font-family="Segoe UI, sans-serif">Be A</text>
+        <text x="7" y="5" text-anchor="middle" font-size="11" font-weight="700" fill="#5B9BD5" font-family="Segoe UI, sans-serif">Better yoU!</text>
+      </g>
+    </g>
+    <g fill="#F0C75E" opacity="0.7">
+      <polygon points="45,100 47,95 49,100 54,100 50,103 52,108 47,105 42,108 44,103 40,100" />
+      <polygon points="235,95 237,90 239,95 244,95 240,98 242,103 237,100 232,103 234,98 230,95" />
+      <polygon points="60,260 62,256 64,260 68,260 65,263 66,267 62,264 58,267 59,263 56,260" />
+    </g>
+  </svg>
+  <h1>BABU</h1>
+  <div class="tagline">Be A Better yoU! &#10024;</div>
+</div>
+
+<!-- ==================== README CONTENT ==================== -->
+<div class="content">
+
+  <div class="disclaimer">
+    <strong>Prototype by BethZ.</strong> This is an experimental communication coaching skill. Nothing is guaranteed. Results depend on transcript availability, meeting context, and the inherent limitations of AI-based analysis. Use it as a growth tool, not a performance metric.<br><br>
+    <strong>Please do not share this repo directly.</strong> If someone is interested, have them reach out to me for access. The goal is to grow this together as a community, not distribute an unfinished tool.
+  </div>
+
+  <p>A communication coaching skill for <a href="https://githubnext.com/projects/copilot-cli/" style="color: var(--cp-link);">GitHub Copilot CLI</a> that evaluates your speaking patterns, executive presence, and behavioral habits from meeting transcripts.</p>
+
+  <p>BABU pulls your actual words from Teams meeting transcripts, scores them against a structured framework, and gives you specific, actionable coaching, the same way a live executive coach would.</p>
+
+  <h2>What It Does</h2>
+  <ul>
+    <li>Analyzes your verbatim quotes from meeting transcripts (via Microsoft 365 Copilot / WorkIQ)</li>
+    <li>Scores you across 9 categories with a three-tier rating system</li>
+    <li>Generates a before/after reframe table: what you said vs. what you could say</li>
+    <li>Tracks progress over time with report cards and trend arrows</li>
+    <li>Scans for 13 behavioral patterns that damage trust (interrupting, dismissiveness, passive aggression, etc.)</li>
+    <li>Evaluates executive presence: gravitas, communication, engagement</li>
+    <li>Compares your voice to CEO vs. CTO communication styles</li>
+    <li>Delivers feedback with coaching warmth, not criticism</li>
+  </ul>
+
+  <h2>Categories Evaluated</h2>
+  <table>
+    <thead>
+      <tr><th>#</th><th>Category</th><th>What It Measures</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Power Language</td><td>Hedge words vs. commitment language</td></tr>
+      <tr><td>2</td><td>Specificity</td><td>Vague references vs. precise names, dates, numbers</td></tr>
+      <tr><td>3</td><td>Tense Orientation</td><td>Backward-looking ("what I did") vs. forward-looking ("what this enables")</td></tr>
+      <tr><td>4</td><td>Speaking Dynamics</td><td>Talk time, first contribution timing, floor recovery, filler density</td></tr>
+      <tr><td>5</td><td>Influence &amp; Framing</td><td>Anchoring, attribution, storytelling structure, closing strength</td></tr>
+      <tr><td>6</td><td>Executive Presence</td><td>Gravitas, communication clarity, engagement in group settings</td></tr>
+      <tr><td>7</td><td>CEO vs. CTO Voice</td><td>Which executive voice dominates, and does it match the room</td></tr>
+      <tr><td>8</td><td>Audience Calibration</td><td>Vocabulary shifting across different meeting types</td></tr>
+      <tr><td>9</td><td>Behavioral Awareness</td><td>13-behavior scan for trust-damaging patterns</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Sample Output</h2>
+  <p>See <code>examples/sample-report.md</code> in the repo for a full coaching report.</p>
+
+  <h2>Installation</h2>
+  <p>Copy the <code>SKILL.md</code> file to your Copilot CLI skills directory:</p>
+  <pre><code># macOS / Linux
+mkdir -p ~/.copilot/skills/babu
+cp SKILL.md ~/.copilot/skills/babu/
+
+# Windows (PowerShell)
+New-Item -ItemType Directory -Path "$env:USERPROFILE\.copilot\skills\babu" -Force
+Copy-Item SKILL.md "$env:USERPROFILE\.copilot\skills\babu\"</code></pre>
+  <p>Start a new Copilot CLI session. BABU will be available automatically.</p>
+
+  <h2>Requirements</h2>
+  <ul>
+    <li><a href="https://githubnext.com/projects/copilot-cli/" style="color: var(--cp-link);">GitHub Copilot CLI</a></li>
+    <li>Microsoft 365 account with Teams meeting transcripts enabled</li>
+    <li>WorkIQ plugin (for pulling meeting transcript data)</li>
+  </ul>
+
+  <h2>Usage</h2>
+  <p>Just ask naturally. BABU activates when you ask about communication, speaking, or meeting performance:</p>
+  <ul>
+    <li>"How do I sound in meetings this week?"</li>
+    <li>"Evaluate my executive presence"</li>
+    <li>"How do I sound with [person name]?"</li>
+    <li>"Give me a BABU report"</li>
+    <li>"What bad habits do I have in meetings?"</li>
+    <li>"Am I improving?"</li>
+  </ul>
+
+  <p>Every report includes:</p>
+  <ol>
+    <li>A warm welcome and positive reinforcement</li>
+    <li>Report card with scores and trends</li>
+    <li>Wins to celebrate</li>
+    <li>A reframe table (what you say vs. what you could say)</li>
+    <li>Behavioral check (13 behaviors scanned)</li>
+    <li>Executive presence scorecard</li>
+    <li>CEO/CTO voice analysis</li>
+    <li>Practice assignments for the week</li>
+    <li>Coach's closing note</li>
+  </ol>
+
+  <h2>Philosophy</h2>
+  <p>BABU is a coach, not a critic.</p>
+  <ul>
+    <li>Leads with wins before growth areas</li>
+    <li>Frames gaps as "next level," not "problems"</li>
+    <li>Grounds every positive statement in transcript evidence (no empty flattery)</li>
+    <li>Normalizes the journey (everyone has patterns)</li>
+    <li>Gives permission to be imperfect</li>
+    <li>Ends every session with momentum</li>
+  </ul>
+
+  <h2>Contributing</h2>
+  <p>Ideas for new evaluation dimensions, behavioral patterns, or coaching approaches are welcome. Open an issue or PR.</p>
+
+  <h2>License</h2>
+  <p>MIT</p>
+
+</div>
+
+<div class="footer">
+  BABU &mdash; Be A Better yoU! &bull; Created by BethZ &bull; Prototype
+</div>
+
+</body>
+</html>
