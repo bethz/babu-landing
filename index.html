@@ -323,15 +323,29 @@ svg { filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1)); }
   <p>See <code>examples/sample-report.md</code> in the repo for a full coaching report.</p>
 
   <h2>Installation</h2>
-  <p>Copy the <code>SKILL.md</code> file to your Copilot CLI skills directory:</p>
-  <pre><code># macOS / Linux
-mkdir -p ~/.copilot/skills/babu
-cp SKILL.md ~/.copilot/skills/babu/
 
-# Windows (PowerShell)
-New-Item -ItemType Directory -Path "$env:USERPROFILE\.copilot\skills\babu" -Force
-Copy-Item SKILL.md "$env:USERPROFILE\.copilot\skills\babu\"</code></pre>
-  <p>Start a new Copilot CLI session. BABU will be available automatically.</p>
+  <h3># Windows</h3>
+  <ol>
+    <li>Login to GitHub</li>
+    <li>Clone this repo</li>
+    <li>Copy SKILL.md to your skills folder:</li>
+  </ol>
+  <pre><code>Copy-Item SKILL.md "$env:USERPROFILE\.copilot\skills\babu\"</code></pre>
+
+  <p style="margin-top: 12px;">Or ask Beth to send you the SKILL.md file directly.</p>
+
+  <h3 style="margin-top: 20px;"># macOS / Linux</h3>
+  <ol>
+    <li>Login to GitHub</li>
+    <li>Clone this repo</li>
+    <li>Copy SKILL.md to your skills folder:</li>
+  </ol>
+  <pre><code>mkdir -p ~/.copilot/skills/babu
+cp SKILL.md ~/.copilot/skills/babu/</code></pre>
+
+  <p style="margin-top: 12px;">Or ask Beth to send you the SKILL.md file directly.</p>
+
+  <p style="margin-top: 16px;">Start a new Copilot CLI session. BABU will be available automatically.</p>
 
   <h2>Requirements</h2>
   <ul>
